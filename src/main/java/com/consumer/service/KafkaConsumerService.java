@@ -31,4 +31,19 @@ public class KafkaConsumerService {
         messageRepository.save(auditLog);
         log.info("Message saved to MongoDB with ID: {}", auditLog.getId());
     }
+
+    @KafkaListener(topics = "patient.audit", groupId =  "audit-group")
+    public void patient_listen(AuditPayload payload) {
+        EntityAuditLog auditLog = new EntityAuditLog();
+        auditLog.setEntityName(payload.getEntityName());
+        auditLog.setEntityId(payload.getEntityId());
+        auditLog.setAction(payload.getAction());
+        auditLog.setOldValue(payload.getOldValue());
+        auditLog.setNewValue(payload.getNewValue());
+        auditLog.setChangedBy(payload.getChangedBy());
+        auditLog.setTimestamp(payload.getTimestamp());
+
+        messageRepository.save(auditLog);
+        log.info("Message saved to MongoDB with ID: {}", auditLog.getId());
+    }
 } 
