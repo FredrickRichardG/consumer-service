@@ -17,7 +17,7 @@ public class KafkaConsumerService {
 
     private final MessageRepository messageRepository;
 
-    @KafkaListener(topics = "entity.audit", groupId =  "audit-group")
+    @KafkaListener(topics = "vitalsign.audit", groupId =  "audit-group")
     public void listen(AuditPayload payload) {
         EntityAuditLog auditLog = new EntityAuditLog();
         auditLog.setEntityName(payload.getEntityName());

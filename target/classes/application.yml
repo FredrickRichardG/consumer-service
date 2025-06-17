@@ -21,6 +21,20 @@ spring:
         spring.json.value.default.type: com.consumer.entity.AuditPayload
         spring.json.use.type.headers: false
 
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+  data:
+    elasticsearch:
+      client:
+        reactive:
+          endpoints: localhost:9200
+
+rabbitmq:
+  queue: patient-queue
 
 management:
   endpoints:
